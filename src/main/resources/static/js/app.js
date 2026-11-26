@@ -136,7 +136,9 @@
       ...lineas.map((l) => `• ${l.cantidad} x ${l.nombre} — ${dinero(l.precio * l.cantidad)}`),
       '',
       `*Total: ${dinero(total)}*`,
+      tipo === 'Entrega a domicilio' ? '(sin domicilio)' : null,
       `Tipo: ${tipo}`,
+      tipo === 'Entrega a domicilio' ? 'Domicilio: por favor confírmenme el valor' : null,
       nombre ? `Nombre: ${nombre}` : null,
       tipo === 'Entrega a domicilio' && dir ? `Dirección: ${dir}` : null,
       notas ? `Notas: ${notas}` : null,
@@ -185,7 +187,9 @@
     $('vaciar').onclick = () => { carrito = {}; guardarCarrito(); renderCarrito(); };
     $('enviar').onclick = enviar;
     document.querySelectorAll('input[name=tipo]').forEach((r) => r.onchange = () => {
-      $('dirWrap').hidden = document.querySelector('input[name=tipo]:checked').value !== 'Entrega a domicilio';
+      const domicilio = document.querySelector('input[name=tipo]:checked').value === 'Entrega a domicilio';
+      $('dirWrap').hidden = !domicilio;
+      $('avisoDomicilio').hidden = !domicilio;
     });
   }
 
