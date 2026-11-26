@@ -1,35 +1,53 @@
 (() => {
   const $ = (id) => document.getElementById(id);
-  const CART_KEY = 'crostello_carrito';
+  const CART_KEY = 'crostello_pedido';
 
   let config = {};
   let grupos = [];
   let categorias = [];
   let productos = [];
-  let carrito = cargarCarrito(); // { "idProducto:indiceOpcion": cantidad }
+  // Cada unidad pedida es su propia línea, con su nota: [{ id, key: "idProducto:indiceOpcion", nota }]
+  let carrito = cargarCarrito();
+  const notaAbierta = new Set(); // ids de líneas con el campo de nota desplegado
 
   const dinero = (n) => '$' + Math.round(n).toLocaleString('es-CO');
+  const nuevoId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
 
   function cargarCarrito() {
-    try { return JSON.parse(localStorage.getItem(CART_KEY)) || {}; } catch { return {}; }
+    try {
+      const c = JSON.parse(localStorage.getItem(CART_KEY));
+      return Array.isArray(c) ? c : [];
+    } catch { return []; }
   }
   function guardarCarrito() {
     try { localStorage.setItem(CART_KEY, JSON.stringify(carrito)); } catch { /* sin almacenamiento */ }
   }
 
-  // Una "línea" del carrito: producto + opción (Personal/Mediana) si la tiene
-  function linea(key) {
+  // Producto + opción (Personal/Mediana) si la tiene
+  function detalle(key) {
     const [id, v] = key.split(':');
     const p = productos.find((x) => String(x.id) === id);
     if (!p) return null;
     const op = p.opciones ? p.opciones[Number(v)] : null;
     if (p.opciones && !op) return null;
+    const cat = categorias.find((c) => c.id === p.categoria);
     return {
-      key,
       nombre: op ? `${p.nombre} (${op.nombre})` : p.nombre,
+      categoria: cat ? (cat.etiqueta || cat.nombre) : '',
       precio: op ? op.precio : p.precio,
-      cantidad: carrito[key],
     };
+  }
+
+  // Líneas listas para mostrar; si un producto se repite, cada una lleva su número ("2 de 3")
+  function lineas() {
+    const validas = carrito.map((c) => ({ ...c, ...detalle(c.key) })).filter((l) => l.nombre);
+    const total = {};
+    validas.forEach((l) => { total[l.key] = (total[l.key] || 0) + 1; });
+    const visto = {};
+    return validas.map((l) => {
+      visto[l.key] = (visto[l.key] || 0) + 1;
+      return { ...l, etiqueta: total[l.key] > 1 ? `${l.nombre} (${visto[l.key]} de ${total[l.key]})` : l.nombre };
+    });
   }
 
   async function init() {
@@ -40,7 +58,7 @@
     config = cfg;
     ({ grupos, categorias, productos } = menu);
 
-    for (const k of Object.keys(carrito)) if (!linea(k)) delete carrito[k];
+    carrito = carrito.filter((c) => detalle(c.key));
 
     $('pie').innerHTML =
       `<a href="${esc(config.mapa)}" target="_blank" rel="noopener">${esc(config.direccion)}</a><br>` +
@@ -89,18 +107,17 @@
   }
 
   function renderCarrito() {
-    const lineas = Object.keys(carrito).map(linea).filter(Boolean);
-    const cantidad = lineas.reduce((s, l) => s + l.cantidad, 0);
-    const total = lineas.reduce((s, l) => s + l.cantidad * l.precio, 0);
+    const ls = lineas();
+    const cantidad = ls.length;
+    const total = ls.reduce((s, l) => s + l.precio, 0);
 
-    $('items').innerHTML = lineas.map((l) => `
+    $('items').innerHTML = ls.map((l) => `
       <li class="item">
-        <div class="item-info"><strong>${esc(l.nombre)}</strong><span>${dinero(l.precio)} c/u · ${dinero(l.precio * l.cantidad)}</span></div>
-        <div class="qty">
-          <button data-menos="${l.key}" aria-label="Quitar uno">−</button>
-          <span>${l.cantidad}</span>
-          <button data-mas="${l.key}" aria-label="Agregar uno">+</button>
-        </div>
+        <div class="item-info"><strong>${esc(l.etiqueta)}</strong><span>${l.categoria ? esc(l.categoria) + ' · ' : ''}${dinero(l.precio)}</span></div>
+        <button class="quitar" data-quitar="${l.id}" aria-label="Quitar ${esc(l.etiqueta)}">Quitar</button>
+        ${l.nota || notaAbierta.has(l.id)
+          ? `<input class="nota-item" type="text" data-nota-input="${l.id}" value="${esc(l.nota || '')}" maxlength="140" placeholder="Escribe la nota de este producto" aria-label="Nota para ${esc(l.etiqueta)}">`
+          : `<button class="nota-btn" data-nota="${l.id}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><span>Agregar nota <small>(sin cebolla, extra queso…)</small></span></button>`}
       </li>`).join('');
 
     $('vacio').hidden = cantidad > 0;
@@ -112,9 +129,20 @@
     $('fabTotal').textContent = cantidad ? dinero(total) : '';
   }
 
-  function cambiar(key, delta) {
-    const nueva = (carrito[key] || 0) + delta;
-    if (nueva <= 0) delete carrito[key]; else carrito[key] = nueva;
+  function agregar(key) {
+    carrito.push({ id: nuevoId(), key, nota: '' });
+    guardarCarrito();
+    renderCarrito();
+  }
+  function quitar(id) {
+    carrito = carrito.filter((c) => c.id !== id);
+    notaAbierta.delete(id);
+    guardarCarrito();
+    renderCarrito();
+  }
+  function vaciarCarrito() {
+    carrito = [];
+    notaAbierta.clear();
     guardarCarrito();
     renderCarrito();
   }
@@ -125,8 +153,8 @@
   }
 
   function armarMensaje() {
-    const lineas = Object.keys(carrito).map(linea).filter(Boolean);
-    const total = lineas.reduce((s, l) => s + l.cantidad * l.precio, 0);
+    const ls = lineas();
+    const total = ls.reduce((s, l) => s + l.precio, 0);
     const tipo = document.querySelector('input[name=tipo]:checked').value;
     const nombre = $('cliente').value.trim();
     const dir = $('direccion').value.trim();
@@ -135,7 +163,10 @@
     return [
       `Hola ${config.nombre}, quiero hacer un pedido:`,
       '',
-      ...lineas.map((l) => `• ${l.cantidad} x ${l.nombre} — ${dinero(l.precio * l.cantidad)}`),
+      ...ls.flatMap((l) => [
+        `• ${l.categoria ? l.categoria + ': ' : ''}${l.etiqueta} — ${dinero(l.precio)}`,
+        (l.nota || '').trim() ? `   Nota: ${l.nota.trim()}` : null,
+      ]),
       '',
       `*Total: ${dinero(total)}*`,
       tipo === 'Entrega a domicilio' ? '(sin domicilio)' : null,
@@ -143,23 +174,36 @@
       tipo === 'Entrega a domicilio' ? 'Domicilio: por favor confírmenme el valor' : null,
       nombre ? `Nombre: ${nombre}` : null,
       tipo === 'Entrega a domicilio' && dir ? `Dirección: ${dir}` : null,
-      notas ? `Notas: ${notas}` : null,
+      notas ? `Notas generales: ${notas}` : null,
     ].filter((l) => l !== null).join('\n');
   }
 
-  function enviar() {
+  // Al pulsar "Enviar": primero se muestra un resumen para revisar el pedido y las notas
+  function revisar() {
     const tipo = document.querySelector('input[name=tipo]:checked').value;
     if (tipo === 'Entrega a domicilio' && !$('direccion').value.trim()) {
       $('direccion').focus();
       return;
     }
+    const ls = lineas();
+    const total = ls.reduce((s, l) => s + l.precio, 0);
+    $('resumen').innerHTML = ls.map((l) => `
+      <li>
+        <div class="r-fila"><span>${l.categoria ? esc(l.categoria) + ': ' : ''}<strong>${esc(l.etiqueta)}</strong></span><span>${dinero(l.precio)}</span></div>
+        ${(l.nota || '').trim() ? `<p class="r-nota">Nota: ${esc(l.nota.trim())}</p>` : '<p class="r-sin">Sin nota</p>'}
+      </li>`).join('');
+    const dir = $('direccion').value.trim();
+    $('resumenPie').innerHTML = `<strong>Total: ${dinero(total)}</strong><br>${esc(tipo)}${tipo === 'Entrega a domicilio' && dir ? ': ' + esc(dir) : ''}`;
+    $('confirmar').showModal();
+  }
+
+  function enviar() {
+    $('confirmar').close();
     window.open(`https://wa.me/${config.whatsapp}?text=${encodeURIComponent(armarMensaje())}`, '_blank', 'noopener');
 
     // Pedido enviado: el carrito y las notas empiezan de cero (el nombre y la dirección se conservan)
-    carrito = {};
-    guardarCarrito();
     $('notas').value = '';
-    renderCarrito();
+    vaciarCarrito();
     abrir(false);
   }
 
@@ -168,14 +212,18 @@
       const t = e.target.closest('button');
       if (!t) return;
       if (t.dataset.add) {
-        cambiar(t.dataset.add, 1);
+        agregar(t.dataset.add);
         const fab = $('abrirCarrito');
         fab.classList.remove('bump');
         void fab.offsetWidth;
         fab.classList.add('bump');
       }
-      if (t.dataset.mas) cambiar(t.dataset.mas, 1);
-      if (t.dataset.menos) cambiar(t.dataset.menos, -1);
+      if (t.dataset.quitar) quitar(t.dataset.quitar);
+      if (t.dataset.nota) {
+        notaAbierta.add(t.dataset.nota);
+        renderCarrito();
+        document.querySelector(`[data-nota-input="${t.dataset.nota}"]`)?.focus();
+      }
       if (t.dataset.grupo) $('grupo-' + t.dataset.grupo)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
@@ -193,8 +241,18 @@
     $('abrirCarrito').onclick = () => abrir(true);
     $('cerrarCarrito').onclick = () => abrir(false);
     $('overlay').onclick = () => abrir(false);
-    $('vaciar').onclick = () => { carrito = {}; guardarCarrito(); renderCarrito(); };
-    $('enviar').onclick = enviar;
+    $('vaciar').onclick = vaciarCarrito;
+    $('items').addEventListener('input', (e) => {
+      const id = e.target.dataset.notaInput;
+      const c = carrito.find((x) => x.id === id);
+      if (!c) return;
+      c.nota = e.target.value;
+      guardarCarrito();
+    });
+    $('enviar').onclick = revisar;
+    $('confirmarEnviar').onclick = enviar;
+    $('confirmarVolver').onclick = () => $('confirmar').close();
+    $('confirmar').addEventListener('click', (e) => { if (e.target === e.currentTarget) e.currentTarget.close(); });
     document.querySelectorAll('input[name=tipo]').forEach((r) => r.onchange = () => {
       const domicilio = document.querySelector('input[name=tipo]:checked').value === 'Entrega a domicilio';
       $('dirWrap').hidden = !domicilio;

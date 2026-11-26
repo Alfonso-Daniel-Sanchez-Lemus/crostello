@@ -66,14 +66,14 @@
           <input id="cliente" type="text" placeholder="¿Cómo te llamamos?" autocomplete="name">
         </label>
         <div class="radios">
-          <label><input type="radio" name="tipo" value="Recoger en local" checked> Recoger</label>
-          <label><input type="radio" name="tipo" value="Entrega a domicilio"> Domicilio</label>
+          <label><input type="radio" name="tipo" value="Entrega a domicilio" checked> Domicilio</label>
+          <label><input type="radio" name="tipo" value="Recoger en local"> Recoger</label>
         </div>
-        <label id="dirWrap" hidden>Dirección
+        <label id="dirWrap">Dirección
           <input id="direccion" type="text" placeholder="Barrio, calle, referencias">
         </label>
-        <p id="avisoDomicilio" class="aviso" hidden>El valor del domicilio no está incluido en el total. Te confirmamos cuánto es por WhatsApp según tu dirección.</p>
-        <label>Notas (opcional)
+        <p id="avisoDomicilio" class="aviso">El valor del domicilio no está incluido en el total. Te confirmamos cuánto es por WhatsApp según tu dirección.</p>
+        <label>Notas generales del pedido (opcional)
           <textarea id="notas" rows="2" placeholder="Sin cebolla, extra queso..."></textarea>
         </label>
       </div>
@@ -84,6 +84,17 @@
       <button id="vaciar" class="link-btn">Vaciar pedido</button>
     </div>
   </aside>
+
+  <dialog class="confirmar" id="confirmar" aria-labelledby="confirmarTitulo">
+    <h2 id="confirmarTitulo">Revisar o enviar el mensaje</h2>
+    <p class="confirmar-aviso">Recuerda que puedes agregar notas a cada uno de tus pedidos por si necesitas una excepción en alguno de estos productos. Revisa que tu pedido esté completo.</p>
+    <ul class="resumen" id="resumen"></ul>
+    <p class="resumen-pie" id="resumenPie"></p>
+    <div class="confirmar-botones">
+      <button id="confirmarVolver" class="sec-btn">Volver al pedido</button>
+      <button id="confirmarEnviar" class="wa-btn">Enviar por WhatsApp</button>
+    </div>
+  </dialog>
 
   <script src="js/app.js"></script>
 </body>

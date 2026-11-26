@@ -6,18 +6,18 @@
     { "id": "bebidas", "nombre": "Bebidas", "icono": "🥤" }
   ],
   "categorias": [
-    { "id": "deditos", "grupo": "antojitos", "nombre": "Deditos", "nota": "Dedito de 13 cm" },
-    { "id": "trigo", "grupo": "antojitos", "nombre": "Empanadas de trigo" },
-    { "id": "yuca", "grupo": "antojitos", "nombre": "Empanadas de yuca" },
-    { "id": "maiz", "grupo": "antojitos", "nombre": "Empanadas de maíz" },
-    { "id": "panzerottis", "grupo": "panzerottis", "nombre": "Panzerottis" },
-    { "id": "papas", "grupo": "antojitos", "nombre": "Papas rellenas" },
-    { "id": "clasicas", "grupo": "pizzas", "nombre": "Clásicas", "nota": "Personal: para 2 personas · Mediana: familiar" },
-    { "id": "pollo", "grupo": "pizzas", "nombre": "Pollo" },
-    { "id": "carnes", "grupo": "pizzas", "nombre": "Carnes" },
-    { "id": "vegetarianas", "grupo": "pizzas", "nombre": "Vegetarianas" },
-    { "id": "cervezas", "grupo": "bebidas", "nombre": "Cervezas" },
-    { "id": "gaseosas", "grupo": "bebidas", "nombre": "Gaseosas y otras bebidas" }
+    { "id": "deditos", "grupo": "antojitos", "nombre": "Deditos", "etiqueta": "Dedito", "nota": "Dedito de 13 cm" },
+    { "id": "trigo", "grupo": "antojitos", "nombre": "Empanadas de trigo", "etiqueta": "Empanada de trigo" },
+    { "id": "yuca", "grupo": "antojitos", "nombre": "Empanadas de yuca", "etiqueta": "Empanada de yuca" },
+    { "id": "maiz", "grupo": "antojitos", "nombre": "Empanadas de maíz", "etiqueta": "Empanada de maíz" },
+    { "id": "panzerottis", "grupo": "panzerottis", "nombre": "Panzerottis", "etiqueta": "Panzerotti" },
+    { "id": "papas", "grupo": "antojitos", "nombre": "Papas rellenas", "etiqueta": "Papa rellena" },
+    { "id": "clasicas", "grupo": "pizzas", "nombre": "Clásicas", "etiqueta": "Pizza clásica", "nota": "Personal: para 2 personas · Mediana: familiar" },
+    { "id": "pollo", "grupo": "pizzas", "nombre": "Pollo", "etiqueta": "Pizza de pollo" },
+    { "id": "carnes", "grupo": "pizzas", "nombre": "Carnes", "etiqueta": "Pizza de carnes" },
+    { "id": "vegetarianas", "grupo": "pizzas", "nombre": "Vegetarianas", "etiqueta": "Pizza vegetariana" },
+    { "id": "cervezas", "grupo": "bebidas", "nombre": "Cervezas", "etiqueta": "Cerveza" },
+    { "id": "gaseosas", "grupo": "bebidas", "nombre": "Gaseosas y otras bebidas", "etiqueta": "Bebida" }
   ],
   "productos": [
     { "id": 1, "categoria": "deditos", "nombre": "Queso", "descripcion": "Masa dorada con un relleno de queso.", "precio": 2500 },
