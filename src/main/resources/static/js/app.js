@@ -43,7 +43,7 @@
     for (const k of Object.keys(carrito)) if (!linea(k)) delete carrito[k];
 
     $('pie').innerHTML =
-      `<a href="${esc(config.mapa)}" target="_blank" rel="noopener">📍 ${esc(config.direccion)}</a><br>` +
+      `<a href="${esc(config.mapa)}" target="_blank" rel="noopener">${esc(config.direccion)}</a><br>` +
       `<a href="https://wa.me/${esc(config.whatsapp)}" target="_blank" rel="noopener">WhatsApp ${esc(config.telefono)}</a> · ` +
       `<a href="https://instagram.com/${esc(config.instagram)}" target="_blank" rel="noopener">@${esc(config.instagram)}</a>`;
 
@@ -55,22 +55,24 @@
 
   function renderTabs() {
     $('tabs').innerHTML = grupos
-      .map((g, i) => `<button class="tab${i === 0 ? ' active' : ''}" data-grupo="${g.id}">${g.icono} ${g.nombre}</button>`)
+      .map((g, i) => `<button class="tab${i === 0 ? ' active' : ''}" data-grupo="${g.id}">${esc(g.nombre)}</button>`)
       .join('');
   }
 
   function tarjeta(p) {
     const boton = (key, etiqueta, precio) =>
       `<button class="add-btn" data-add="${key}" aria-label="Agregar ${esc(etiqueta)} ${dinero(precio)}">` +
-      `<span class="info"><span class="et">${esc(etiqueta)}</span><span class="p">${dinero(precio)}</span></span>` +
+      `<span class="info"><span class="et">${p.opciones ? esc(etiqueta) : ''}</span><span class="p">${dinero(precio)}</span></span>` +
       `<span class="mas" aria-hidden="true">+</span></button>`;
     const botones = p.opciones
       ? p.opciones.map((o, i) => boton(`${p.id}:${i}`, o.nombre, o.precio)).join('')
       : boton(`${p.id}:0`, 'Agregar', p.precio);
     return `
-      <article class="card">
-        <h4>${esc(p.nombre)}</h4>
-        ${p.descripcion ? `<p>${esc(p.descripcion)}</p>` : ''}
+      <article class="plato${p.opciones ? ' con-opciones' : ''}">
+        <div>
+          <h4>${esc(p.nombre)}</h4>
+          ${p.descripcion ? `<p>${esc(p.descripcion)}</p>` : ''}
+        </div>
         <div class="acciones">${botones}</div>
       </article>`;
   }
@@ -78,10 +80,10 @@
   function renderMenu() {
     $('menu').innerHTML = grupos.map((g) => `
       <section id="grupo-${g.id}">
-        <h2 class="grupo-title">${g.icono} ${g.nombre}</h2>
+        <h2 class="grupo-title">${esc(g.nombre)}</h2>
         ${categorias.filter((c) => c.grupo === g.id).map((c) => `
           ${c.nombre === g.nombre && !c.nota ? '' : `<h3 class="cat-title">${esc(c.nombre)}${c.nota ? `<small>${esc(c.nota)}</small>` : ''}</h3>`}
-          <div class="grid">${productos.filter((p) => p.categoria === c.id).map(tarjeta).join('')}</div>
+          <div class="lista">${productos.filter((p) => p.categoria === c.id).map(tarjeta).join('')}</div>
         `).join('')}
       </section>`).join('');
   }

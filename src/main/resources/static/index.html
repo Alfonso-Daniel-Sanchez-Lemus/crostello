@@ -5,17 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Crostello | Crocancia artesanal</title>
   <meta name="description" content="Carta de Crostello: empanadas, panzerottis, pizzas artesanales y más en Bucaramanga. Pide por WhatsApp.">
+  <meta name="theme-color" content="#10281a">
   <link rel="icon" href="img/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Gloock&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header class="hero">
-    <img class="logo" src="img/logo.png" alt="Crostello - Crocancia artesanal">
-    <p class="lema">Sabores que crean experiencias</p>
-    <p class="sub">Arma tu pedido y envíalo directo a nuestro WhatsApp.</p>
+    <img class="hero-foto" src="img/empanadas.jpg" alt="Empanadas doradas recién horneadas" fetchpriority="high">
+    <div class="hero-velo"></div>
+    <div class="hero-contenido wrap">
+      <span class="sello"><img src="img/logo.png" alt="Crostello"></span>
+      <h1 class="hero-titulo"><span>Crocancia</span> <span>artesanal</span></h1>
+      <p class="lema">Sabores que crean experiencias.</p>
+      <p class="sub">Arma tu pedido y envíalo directo a nuestro WhatsApp.</p>
+    </div>
   </header>
 
   <nav class="tabs" id="tabs" aria-label="Categorías"></nav>
@@ -23,37 +29,41 @@
   <main id="menu" class="wrap"></main>
 
   <section class="gallery wrap" aria-label="Galería">
-    <h2 class="section-title">Todo con el toque Crostello</h2>
+    <h2 class="grupo-title">Todo con el toque Crostello</h2>
     <div class="photos">
       <img src="img/pizza-jamon.jpg" alt="Pizza artesanal" loading="lazy">
-      <img src="img/empanadas.jpg" alt="Empanadas artesanales" loading="lazy">
       <img src="img/pizza-caja.jpg" alt="Pizza lista para llevar con salsas" loading="lazy">
+      <img src="img/empanadas.jpg" alt="Empanadas artesanales" loading="lazy">
     </div>
   </section>
 
   <footer class="foot">
-    <p class="cierre">Cada masa, relleno y combinación: una invitación a disfrutar.</p>
-    <p id="pie"></p>
+    <div class="wrap">
+      <p class="cierre">Cada masa, relleno y combinación: una invitación a disfrutar.</p>
+      <p id="pie"></p>
+    </div>
   </footer>
 
-  <button class="cart-fab" id="abrirCarrito" aria-label="Ver carrito">
-    🛒 <span id="fabCantidad">0</span>
+  <button class="cart-fab" id="abrirCarrito" aria-label="Ver mi pedido">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+    <span class="fab-label">Mi pedido</span>
+    <span id="fabCantidad">0</span>
     <span class="fab-total" id="fabTotal"></span>
   </button>
 
   <div class="overlay" id="overlay"></div>
-  <aside class="drawer" id="drawer" aria-label="Carrito">
+  <aside class="drawer" id="drawer" aria-label="Mi pedido">
     <div class="drawer-head">
       <h2>Tu pedido</h2>
       <button id="cerrarCarrito" aria-label="Cerrar">✕</button>
     </div>
     <div class="drawer-body">
       <ul id="items" class="items"></ul>
-      <p id="vacio" class="vacio">Tu carrito está vacío.</p>
+      <p id="vacio" class="vacio">Aún no has agregado nada. Elige algo del menú y aparecerá aquí.</p>
 
       <div id="formulario" class="form">
         <label>Tu nombre
-          <input id="cliente" type="text" placeholder="Ej. Alfonso" autocomplete="name">
+          <input id="cliente" type="text" placeholder="¿Cómo te llamamos?" autocomplete="name">
         </label>
         <div class="radios">
           <label><input type="radio" name="tipo" value="Recoger en local" checked> Recoger</label>
@@ -62,7 +72,7 @@
         <label id="dirWrap" hidden>Dirección
           <input id="direccion" type="text" placeholder="Barrio, calle, referencias">
         </label>
-        <p id="avisoDomicilio" class="aviso" hidden>🛵 El valor del domicilio no está incluido en el total. Te confirmamos cuánto es por WhatsApp según tu dirección.</p>
+        <p id="avisoDomicilio" class="aviso" hidden>El valor del domicilio no está incluido en el total. Te confirmamos cuánto es por WhatsApp según tu dirección.</p>
         <label>Notas (opcional)
           <textarea id="notas" rows="2" placeholder="Sin cebolla, extra queso..."></textarea>
         </label>
@@ -71,7 +81,7 @@
     <div class="drawer-foot">
       <div class="total-row"><span>Total</span><strong id="total">$0</strong></div>
       <button id="enviar" class="wa-btn" disabled>Enviar pedido por WhatsApp</button>
-      <button id="vaciar" class="link-btn">Vaciar carrito</button>
+      <button id="vaciar" class="link-btn">Vaciar pedido</button>
     </div>
   </aside>
 
