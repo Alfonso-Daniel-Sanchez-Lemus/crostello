@@ -7,6 +7,7 @@
   --tinta: #1b2a1f;        /* texto sobre papel */
   --hoja: #1a7f45;         /* botón de WhatsApp */
   --linea: rgba(244, 236, 218, .22);
+  --ramas: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320' viewBox='0 0 320 320'><defs><g id='p' fill='%231b4128'><path d='M0 0Q6 -30 -2 -62' stroke='%231b4128' stroke-width='4' fill='none'/><g transform='translate(-2 -62)'><g transform='rotate(15)'><path d='M0 0C12 -16 32 -14 46 6C30 -4 14 -4 0 0Z'/></g><g transform='rotate(-30)'><path d='M0 0C12 -16 32 -14 46 6C30 -4 14 -4 0 0Z'/></g><g transform='rotate(-72)'><path d='M0 0C12 -16 32 -14 46 6C30 -4 14 -4 0 0Z'/></g><g transform='scale(-1 1) rotate(15)'><path d='M0 0C12 -16 32 -14 46 6C30 -4 14 -4 0 0Z'/></g><g transform='scale(-1 1) rotate(-30)'><path d='M0 0C12 -16 32 -14 46 6C30 -4 14 -4 0 0Z'/></g><g transform='scale(-1 1) rotate(-72)'><path d='M0 0C12 -16 32 -14 46 6C30 -4 14 -4 0 0Z'/></g><circle cx='-3' cy='4' r='3.5'/><circle cx='4' cy='5' r='3.5'/></g></g><g id='z'><path d='M-24 -28L24 -28L0 34Z' fill='%231b4128'/><path d='M-28 -34Q0 -46 28 -34L25 -24Q0 -35 -25 -24Z' fill='%231b4128'/><circle cx='-8' cy='-12' r='4.5' fill='%2310281a'/><circle cx='9' cy='-9' r='4.5' fill='%2310281a'/><circle cx='0' cy='8' r='4' fill='%2310281a'/></g></defs><use href='%23p' transform='translate(62 130)'/><use href='%23z' transform='translate(195 72) rotate(18)'/><use href='%23p' transform='translate(250 275) scale(.75)'/><use href='%23z' transform='translate(118 268) rotate(-25) scale(.85)'/><use href='%23z' transform='translate(292 170) rotate(40) scale(.6)'/></svg>");
   --serif: 'Gloock', Georgia, serif;
   --sans: 'Figtree', system-ui, sans-serif;
 }
@@ -16,7 +17,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 64px; }
 body {
   margin: 0;
   font-family: var(--sans);
-  background: var(--pizarra);
+  background: var(--pizarra) var(--ramas) 0 0 / 320px 320px;
   color: var(--masa);
   -webkit-font-smoothing: antialiased;
 }
@@ -74,21 +75,26 @@ body {
   margin: 72px 0 6px;
 }
 .cat-title {
-  margin: 34px 0 0; padding-bottom: 10px;
+  margin: 40px 0 0; padding-bottom: 10px;
   display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
   font: 700 1.15rem var(--sans); color: var(--brasa);
   border-bottom: 2px solid var(--brasa);
 }
 .cat-title small { color: var(--humo); font-weight: 400; font-size: .9rem; }
 
-.lista { display: grid; grid-template-columns: 1fr 1fr; column-gap: 56px; }
+.lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 18px; }
 .plato {
-  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 18px;
-  padding: 18px 0;
-  border-bottom: 1px dashed var(--linea);
+  display: flex; flex-direction: column; justify-content: space-between; gap: 16px;
+  padding: 20px 20px 18px;
+  background: rgba(10, 28, 17, .94);
+  border: 1px solid rgba(244, 236, 218, .16);
+  border-radius: 20px 20px 20px 6px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, .25);
+  transition: border-color .2s;
 }
-.plato h4 { margin: 0; font: 600 1.12rem var(--sans); }
-.plato p { margin: 4px 0 0; color: var(--humo); font-size: .93rem; line-height: 1.5; max-width: 44ch; }
+.plato:hover { border-color: rgba(255, 122, 26, .6); }
+.plato h4 { margin: 0; font: 600 1.15rem var(--sans); }
+.plato p { margin: 6px 0 0; color: var(--humo); font-size: .93rem; line-height: 1.5; }
 .acciones { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
 
 .add-btn {
@@ -192,9 +198,6 @@ body {
 .aviso { margin: 0; padding: 11px 12px; border-radius: 6px; background: #ffe6c7; color: #6b3a08; font-size: .88rem; line-height: 1.45; }
 
 /* ---------- Pantallas chicas ---------- */
-@media (max-width: 860px) {
-  .lista { grid-template-columns: 1fr; }
-}
 @media (max-width: 560px) {
   .hero { min-height: 62svh; }
   .sello { width: 78px; height: 78px; }
@@ -202,9 +205,7 @@ body {
   .tabs { justify-content: flex-start; }
   .tab { padding: 14px 13px 11px; }
   .grupo-title { margin-top: 56px; }
-  .plato.con-opciones { grid-template-columns: 1fr; }
-  .plato.con-opciones .acciones { flex-direction: row; flex-wrap: wrap; margin-top: 10px; }
-  .plato.con-opciones .add-btn { flex: 1 1 140px; }
+  .lista { grid-template-columns: 1fr; }
   .photos { grid-template-columns: 1fr 1fr; }
   .photos img { height: 220px; }
   .photos img:last-child { display: none; }
