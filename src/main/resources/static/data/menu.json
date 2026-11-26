@@ -1,0 +1,84 @@
+{
+  "grupos": [
+    { "id": "antojitos", "nombre": "Antojitos", "icono": "🥟" },
+    { "id": "pizzas", "nombre": "Pizzas", "icono": "🍕" },
+    { "id": "bebidas", "nombre": "Bebidas", "icono": "🥤" }
+  ],
+  "categorias": [
+    { "id": "deditos", "grupo": "antojitos", "nombre": "Deditos", "nota": "Dedito de 13 cm" },
+    { "id": "trigo", "grupo": "antojitos", "nombre": "Empanadas de trigo" },
+    { "id": "yuca", "grupo": "antojitos", "nombre": "Empanadas de yuca" },
+    { "id": "maiz", "grupo": "antojitos", "nombre": "Empanadas de maíz" },
+    { "id": "panzerottis", "grupo": "antojitos", "nombre": "Panzerottis" },
+    { "id": "papas", "grupo": "antojitos", "nombre": "Papas rellenas" },
+    { "id": "clasicas", "grupo": "pizzas", "nombre": "Clásicas", "nota": "Personal: para 2 personas · Mediana: familiar" },
+    { "id": "pollo", "grupo": "pizzas", "nombre": "Pollo" },
+    { "id": "carnes", "grupo": "pizzas", "nombre": "Carnes" },
+    { "id": "vegetarianas", "grupo": "pizzas", "nombre": "Vegetarianas" },
+    { "id": "cervezas", "grupo": "bebidas", "nombre": "Cervezas" },
+    { "id": "gaseosas", "grupo": "bebidas", "nombre": "Gaseosas y otras bebidas" }
+  ],
+  "productos": [
+    { "id": 1, "categoria": "deditos", "nombre": "Queso", "descripcion": "Masa dorada con un relleno de queso.", "precio": 2500 },
+    { "id": 2, "categoria": "deditos", "nombre": "Queso y bocadillo", "descripcion": "La combinación del sabor suave del queso con el toque dulce del bocadillo.", "precio": 2500 },
+    { "id": 3, "categoria": "deditos", "nombre": "Bocadillo", "descripcion": "Un relleno de bocadillo que aporta un delicado contraste dulce.", "precio": 2500 },
+
+    { "id": 10, "categoria": "trigo", "nombre": "Mixta", "descripcion": "Masa de trigo con relleno preparado al estilo artesanal de Crostello.", "precio": 4000 },
+    { "id": 11, "categoria": "trigo", "nombre": "Pollo y queso", "descripcion": "Masa de trigo con relleno preparado al estilo artesanal de Crostello.", "precio": 4000 },
+    { "id": 12, "categoria": "trigo", "nombre": "Hawaiana", "descripcion": "Masa de trigo con relleno preparado al estilo artesanal de Crostello.", "precio": 4000 },
+    { "id": 13, "categoria": "trigo", "nombre": "Pesto", "descripcion": "Masa de trigo con relleno preparado al estilo artesanal de Crostello.", "precio": 4000 },
+    { "id": 14, "categoria": "trigo", "nombre": "Mediterránea", "descripcion": "Masa de trigo con relleno preparado al estilo artesanal de Crostello.", "precio": 4000 },
+    { "id": 15, "categoria": "trigo", "nombre": "Bondiola", "descripcion": "Masa de trigo con relleno preparado al estilo artesanal de Crostello.", "precio": 4000 },
+
+    { "id": 20, "categoria": "yuca", "nombre": "Mixta", "descripcion": "Masa de yuca con relleno preparado para disfrutar su textura característica.", "precio": 4000 },
+    { "id": 21, "categoria": "yuca", "nombre": "Pollo y queso", "descripcion": "Masa de yuca con relleno preparado para disfrutar su textura característica.", "precio": 4000 },
+
+    { "id": 30, "categoria": "maiz", "nombre": "Mixta", "descripcion": "Masa de maíz con relleno de sabor tradicional y artesanal.", "precio": 4000 },
+    { "id": 31, "categoria": "maiz", "nombre": "Chorizo español y queso", "descripcion": "Masa de maíz con relleno de sabor tradicional y artesanal.", "precio": 4000 },
+
+    { "id": 40, "categoria": "panzerottis", "nombre": "Pollo y queso", "descripcion": "Una combinación clásica de pollo y queso en masa dorada.", "precio": 16000 },
+    { "id": 41, "categoria": "panzerottis", "nombre": "Hawaiano", "descripcion": "Jamón, piña y queso: un equilibrio entre notas dulces y saladas.", "precio": 16500 },
+    { "id": 42, "categoria": "panzerottis", "nombre": "Pollo, miel mostaza y chorizo español", "descripcion": "Pollo, salsa de miel mostaza y chorizo español en una combinación de sabores intensos.", "precio": 18500 },
+    { "id": 43, "categoria": "panzerottis", "nombre": "Pollo y champiñones", "descripcion": "Pollo y champiñones en una preparación de sabor suave y reconfortante.", "precio": 18000 },
+
+    { "id": 50, "categoria": "papas", "nombre": "Mixta", "descripcion": "Una preparación de inspiración casera, con exterior dorado y relleno mixto.", "precio": 4000 },
+
+    { "id": 100, "categoria": "clasicas", "nombre": "Pollo y champiñones", "descripcion": "Pechuga de pollo horneada y champiñones frescos sobre nuestra base napolitana.", "opciones": [{ "nombre": "Personal", "precio": 32900 }, { "nombre": "Mediana", "precio": 48900 }] },
+    { "id": 101, "categoria": "clasicas", "nombre": "Hawaiana", "descripcion": "Jamón, piña y queso fundido: el equilibrio perfecto entre sabores dulces y salados.", "opciones": [{ "nombre": "Personal", "precio": 27900 }, { "nombre": "Mediana", "precio": 40900 }] },
+    { "id": 102, "categoria": "clasicas", "nombre": "Napolitana", "descripcion": "Base napolitana, rodajas de tomate, queso, orégano y albahaca fresca.", "opciones": [{ "nombre": "Personal", "precio": 27900 }, { "nombre": "Mediana", "precio": 40900 }] },
+    { "id": 103, "categoria": "clasicas", "nombre": "Criolla", "descripcion": "Carne desmechada, hogao artesanal de tomate y cebolla, y maíz dulce. El sabor de nuestra tierra llevado al horno.", "opciones": [{ "nombre": "Personal", "precio": 32900 }, { "nombre": "Mediana", "precio": 48900 }] },
+    { "id": 104, "categoria": "clasicas", "nombre": "Camarón al ajo", "descripcion": "Camarones salteados en mantequilla de ajo y perejil fresco sobre mozzarella fundida. Una propuesta de inspiración costera.", "opciones": [{ "nombre": "Personal", "precio": 37900 }, { "nombre": "Mediana", "precio": 53900 }] },
+
+    { "id": 110, "categoria": "pollo", "nombre": "Pollo bechamel", "descripcion": "Suave salsa bechamel, pechuga de pollo, champiñones y queso fundido.", "opciones": [{ "nombre": "Personal", "precio": 32900 }, { "nombre": "Mediana", "precio": 48900 }] },
+    { "id": 111, "categoria": "pollo", "nombre": "Pollo miel mostaza", "descripcion": "Pechuga de pollo horneada y tocineta, bañadas en salsa de miel mostaza.", "opciones": [{ "nombre": "Personal", "precio": 32900 }, { "nombre": "Mediana", "precio": 48900 }] },
+    { "id": 112, "categoria": "pollo", "nombre": "Pollo BBQ crispy", "descripcion": "Salsa BBQ, pechuga de pollo y queso, con un toque final de cebollitas crispy.", "opciones": [{ "nombre": "Personal", "precio": 32900 }, { "nombre": "Mediana", "precio": 48900 }] },
+    { "id": 113, "categoria": "pollo", "nombre": "Filipina", "descripcion": "Pechuga, tocineta, maíz tierno, cebolla morada y aceitunas negras y verdes, terminada con rúgula.", "opciones": [{ "nombre": "Personal", "precio": 32900 }, { "nombre": "Mediana", "precio": 48900 }] },
+
+    { "id": 120, "categoria": "carnes", "nombre": "Pepperoni", "descripcion": "Pepperoni y queso fundido sobre nuestra base napolitana.", "opciones": [{ "nombre": "Personal", "precio": 27900 }, { "nombre": "Mediana", "precio": 40900 }] },
+    { "id": 121, "categoria": "carnes", "nombre": "Bacon pepperoni", "descripcion": "La combinación de pepperoni y tocineta crujiente, acompañada de queso fundido.", "opciones": [{ "nombre": "Personal", "precio": 32900 }, { "nombre": "Mediana", "precio": 48900 }] },
+    { "id": 122, "categoria": "carnes", "nombre": "Mexicana", "descripcion": "Carne molida especiada, frijol caraota, chorizo y jalapeños, con nachos crujientes y un toque final de guacamole.", "opciones": [{ "nombre": "Personal", "precio": 32900 }, { "nombre": "Mediana", "precio": 48900 }] },
+    { "id": 123, "categoria": "carnes", "nombre": "Española", "descripcion": "Pepperoni, chorizo español y finas lonjas de jamón serrano.", "opciones": [{ "nombre": "Personal", "precio": 37900 }, { "nombre": "Mediana", "precio": 53900 }] },
+    { "id": 124, "categoria": "carnes", "nombre": "Stroganoff", "descripcion": "Carne de res desmechada o en trozos, champiñones en salsa y rúgula fresca.", "opciones": [{ "nombre": "Personal", "precio": 37900 }, { "nombre": "Mediana", "precio": 53900 }] },
+
+    { "id": 130, "categoria": "vegetarianas", "nombre": "Vegetariana", "descripcion": "Aceitunas, pimentón, cebolla morada, champiñones y queso fundido.", "opciones": [{ "nombre": "Personal", "precio": 27900 }, { "nombre": "Mediana", "precio": 40000 }] },
+    { "id": 131, "categoria": "vegetarianas", "nombre": "Cuatro quesos", "descripcion": "Queso de la casa, queso azul, queso brie y parmesano en una combinación de matices y texturas.", "opciones": [{ "nombre": "Personal", "precio": 37900 }, { "nombre": "Mediana", "precio": 53900 }] },
+    { "id": 132, "categoria": "vegetarianas", "nombre": "Del Huerto", "descripcion": "Pechuga de pollo, jamón y champiñones en salsa César de la casa, terminada con rúgula fresca.", "opciones": [{ "nombre": "Personal", "precio": 32900 }, { "nombre": "Mediana", "precio": 48900 }] },
+
+    { "id": 200, "categoria": "cervezas", "nombre": "Modelo", "descripcion": "", "precio": 9000 },
+    { "id": 201, "categoria": "cervezas", "nombre": "Stella", "descripcion": "", "precio": 8000 },
+    { "id": 202, "categoria": "cervezas", "nombre": "Coronita", "descripcion": "", "precio": 5000 },
+    { "id": 203, "categoria": "cervezas", "nombre": "BBC", "descripcion": "", "precio": 7000 },
+    { "id": 204, "categoria": "cervezas", "nombre": "BBC Rosé", "descripcion": "", "precio": 5000 },
+    { "id": 205, "categoria": "cervezas", "nombre": "Club lata", "descripcion": "", "precio": 5000 },
+    { "id": 206, "categoria": "cervezas", "nombre": "Michelada", "descripcion": "", "precio": 5000 },
+    { "id": 207, "categoria": "cervezas", "nombre": "Budweiser", "descripcion": "", "precio": 4000 },
+
+    { "id": 210, "categoria": "gaseosas", "nombre": "Agua con y sin gas", "descripcion": "", "precio": 1500 },
+    { "id": 211, "categoria": "gaseosas", "nombre": "Agua grande", "descripcion": "", "precio": 2000 },
+    { "id": 212, "categoria": "gaseosas", "nombre": "Pony Malta", "descripcion": "", "precio": 3000 },
+    { "id": 213, "categoria": "gaseosas", "nombre": "Gatorade", "descripcion": "", "precio": 4500 },
+    { "id": 214, "categoria": "gaseosas", "nombre": "Coca-Cola 400 ml", "descripcion": "", "precio": 4000 },
+    { "id": 215, "categoria": "gaseosas", "nombre": "Coca-Cola 1,5 L", "descripcion": "", "precio": 7000 },
+    { "id": 216, "categoria": "gaseosas", "nombre": "Coca-Cola 3 L", "descripcion": "", "precio": 12000 }
+  ]
+}
