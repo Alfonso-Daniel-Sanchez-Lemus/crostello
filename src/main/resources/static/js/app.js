@@ -80,7 +80,7 @@
       <section id="grupo-${g.id}">
         <h2 class="grupo-title">${g.icono} ${g.nombre}</h2>
         ${categorias.filter((c) => c.grupo === g.id).map((c) => `
-          <h3 class="cat-title">${esc(c.nombre)}${c.nota ? `<small>${esc(c.nota)}</small>` : ''}</h3>
+          ${c.nombre === g.nombre && !c.nota ? '' : `<h3 class="cat-title">${esc(c.nombre)}${c.nota ? `<small>${esc(c.nota)}</small>` : ''}</h3>`}
           <div class="grid">${productos.filter((p) => p.categoria === c.id).map(tarjeta).join('')}</div>
         `).join('')}
       </section>`).join('');

@@ -1,6 +1,7 @@
 {
   "grupos": [
     { "id": "antojitos", "nombre": "Antojitos", "icono": "🥟" },
+    { "id": "panzerottis", "nombre": "Panzerottis", "icono": "🥙" },
     { "id": "pizzas", "nombre": "Pizzas", "icono": "🍕" },
     { "id": "bebidas", "nombre": "Bebidas", "icono": "🥤" }
   ],
@@ -9,7 +10,7 @@
     { "id": "trigo", "grupo": "antojitos", "nombre": "Empanadas de trigo" },
     { "id": "yuca", "grupo": "antojitos", "nombre": "Empanadas de yuca" },
     { "id": "maiz", "grupo": "antojitos", "nombre": "Empanadas de maíz" },
-    { "id": "panzerottis", "grupo": "antojitos", "nombre": "Panzerottis" },
+    { "id": "panzerottis", "grupo": "panzerottis", "nombre": "Panzerottis" },
     { "id": "papas", "grupo": "antojitos", "nombre": "Papas rellenas" },
     { "id": "clasicas", "grupo": "pizzas", "nombre": "Clásicas", "nota": "Personal: para 2 personas · Mediana: familiar" },
     { "id": "pollo", "grupo": "pizzas", "nombre": "Pollo" },
