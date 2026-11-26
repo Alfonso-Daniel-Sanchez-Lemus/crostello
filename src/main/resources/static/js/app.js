@@ -152,6 +152,13 @@
       return;
     }
     window.open(`https://wa.me/${config.whatsapp}?text=${encodeURIComponent(armarMensaje())}`, '_blank', 'noopener');
+
+    // Pedido enviado: el carrito y las notas empiezan de cero (el nombre y la dirección se conservan)
+    carrito = {};
+    guardarCarrito();
+    $('notas').value = '';
+    renderCarrito();
+    abrir(false);
   }
 
   function eventos() {
