@@ -20,9 +20,9 @@
     { "id": "gaseosas", "grupo": "bebidas", "nombre": "Gaseosas y otras bebidas", "etiqueta": "Bebida" }
   ],
   "productos": [
-    { "id": 1, "categoria": "deditos", "nombre": "Queso", "descripcion": "Masa dorada con un relleno de queso.", "precio": 2500 },
-    { "id": 2, "categoria": "deditos", "nombre": "Queso y bocadillo", "descripcion": "La combinación del sabor suave del queso con el toque dulce del bocadillo.", "precio": 2500 },
-    { "id": 3, "categoria": "deditos", "nombre": "Bocadillo", "descripcion": "Un relleno de bocadillo que aporta un delicado contraste dulce.", "precio": 2500 },
+    { "id": 1, "categoria": "deditos", "nombre": "Queso", "descripcion": "Masa dorada con un relleno de queso.", "precio": 4000 },
+    { "id": 2, "categoria": "deditos", "nombre": "Queso y bocadillo", "descripcion": "La combinación del sabor suave del queso con el toque dulce del bocadillo.", "precio": 4000 },
+    { "id": 3, "categoria": "deditos", "nombre": "Bocadillo", "descripcion": "Un relleno de bocadillo que aporta un delicado contraste dulce.", "precio": 4000 },
 
     { "id": 10, "categoria": "trigo", "nombre": "Mixta", "descripcion": "Masa de trigo con relleno preparado al estilo artesanal de Crostello.", "precio": 4000 },
     { "id": 11, "categoria": "trigo", "nombre": "Pollo y queso", "descripcion": "Masa de trigo con relleno preparado al estilo artesanal de Crostello.", "precio": 4000 },
